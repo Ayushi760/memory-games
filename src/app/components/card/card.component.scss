@@ -1,0 +1,20 @@
+.card {
+    width: 100px;
+    height: 100px;
+    background: #FCEC2B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+  }
+  .card.flipped {
+    background: #BB87FF;
+    border: 2px solid #333;
+  }
+  .card-value{
+    font-size: 50px;
+  }
+  

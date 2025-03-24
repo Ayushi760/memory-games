@@ -1,0 +1,3 @@
+<div class="card" [class.flipped]="card.flipped || card.matched">
+    <span *ngIf="card.flipped || card.matched" class="card-value">{{ card.value }}</span>
+  </div>
