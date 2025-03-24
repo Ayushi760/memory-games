@@ -1,0 +1,101 @@
+<div class="game-container">
+  <span class="header">WORD MEMORY GAME</span>
+
+  <!-- Setup Phase -->
+  <div class="setup-phase" *ngIf="gamePhase === 'setup'">
+    <div class="setup-content">
+      <button class="start-btn" (click)="startGame()">Start Game</button>
+      <div class="instructions">
+        <h3>How to Play</h3>
+        <ul>
+          <li>You will see number of words for 10 seconds</li>
+          <li>Try to memorize all the words</li>
+          <li>Then select the words you memorized from a larger set</li>
+          <li>Get all words correct to advance to next level</li>
+          <li>Each level adds one more word to memorize</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timer (shown in both memorize and selection phases) -->
+  <div class="timer" *ngIf="gamePhase === 'memorize' || gamePhase === 'select'">
+    {{ formatTime() }}<span class="milliseconds">.{{ formatMilliseconds() }}</span>
+  </div>
+
+  <!-- Memorize Phase -->
+  <div class="memorize-phase" *ngIf="gamePhase === 'memorize'">
+    <div class="game-info">
+      <div class="level">Level {{ level }}</div>
+      <div class="score">Score: {{ score }}</div>
+    </div>
+    <div class="words-to-memorize">
+      <div class="word-card" *ngFor="let word of wordsToMemorize">
+        {{ word }}
+      </div>
+    </div>
+    <div class="memorize-message">
+      Memorize these {{ selectedWordCount }} words!
+    </div>
+  </div>
+
+  <!-- Selection Phase -->
+  <div class="selection-phase" *ngIf="gamePhase === 'select'">
+    <div class="game-info">
+      <div class="level">Level {{ level }}</div>
+      <div class="score">Score: {{ score }}</div>
+      <div class="selection-count">
+        Selected: {{ selectedWords.length }} / {{ selectedWordCount }}
+      </div>
+    </div>
+    <div class="word-grid">
+      <div class="word-card" *ngFor="let word of displayWords"
+           [class.selected]="selectedWords.includes(word)"
+           (click)="toggleWordSelection(word)">
+        {{ word }}
+      </div>
+    </div>
+    <button class="submit-btn"
+            [disabled]="selectedWords.length !== selectedWordCount"
+            (click)="submitSelections()">
+      Submit Selections
+    </button>
+  </div>
+
+  <!-- Game Over -->
+  <div class="game-over" *ngIf="gamePhase === 'complete'">
+    <div class="game-over-content">
+      <h2>Game Over!</h2>
+      <div class="final-stats">
+        <p>Level Reached: {{ level }}</p>
+        <p>Final Score: {{ score }}</p>
+      </div>
+      <div class="results">
+        <h3>Last Round Results:</h3>
+        <div class="word-results">
+          <div class="word-result" *ngFor="let word of selectedWords"
+               [class.correct]="correctWords.includes(word)">
+            {{ word }}
+          </div>
+        </div>
+        <p class="missed-words" *ngIf="correctWords.length < selectedWordCount">
+          Missed words:
+          <span *ngFor="let word of wordsToMemorize">
+            {{ !selectedWords.includes(word) ? word + ' ' : '' }}
+          </span>
+        </p>
+      </div>
+      <button class="reset-btn" (click)="resetGame()">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Restart Button -->
+  <div class="restart-controls" *ngIf="gamePhase !== 'setup'">
+    <button class="restart-button" (click)="resetGame()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+        <path d="M3 3v5h5"/>
+      </svg>
+    </button>
+  </div>
+</div>

@@ -1,20 +1,45 @@
+.card-container {
+  perspective: 1000px;
+  width: 100px;
+  height: 100px;
+}
+
 .card {
-    width: 100px;
-    height: 100px;
-    background: #FCEC2B;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  border-radius: 10px;
+
+  &.flipped {
+    transform: rotateY(180deg);
   }
-  .card.flipped {
-    background: #BB87FF;
-    border: 2px solid #333;
-  }
-  .card-value{
-    font-size: 50px;
-  }
-  
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-front {
+  background: #FCEC2B;
+}
+
+.card-back {
+  background: #BB87FF;
+  transform: rotateY(180deg);
+  border: 2px solid #333;
+}
+
+.card-value {
+  font-size: 50px;
+}

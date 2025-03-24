@@ -1,0 +1,36 @@
+<div class="game-container" [class.game-active]="isPlaying">
+  <span class="header">SIMON SAYS</span>
+  <div class="status-panel">
+    <p class="status" [style.color]="
+      gameStatus.includes('Congratulations') || 
+      gameStatus.includes('Correct') || 
+      gameStatus.includes('Complete') ? successColor : '#FCEC2B'
+    ">{{ gameStatus }}</p>
+    <button class="start-btn" (click)="startGame()" [disabled]="isPlaying">Start Game</button>
+  </div>
+  
+  <div class="simon-board">
+    <div class="level-indicator">{{ currentLevel }}</div>
+    <div class="simon-button red-button"
+         [class.active]="buttons[0].isActive"
+         (click)="handlePlayerInput(0)">
+    </div>
+    <div class="simon-button green-button"
+         [class.active]="buttons[1].isActive"
+         (click)="handlePlayerInput(1)">
+    </div>
+    <div class="simon-button blue-button"
+         [class.active]="buttons[2].isActive"
+         (click)="handlePlayerInput(2)">
+    </div>
+    <div class="simon-button yellow-button"
+         [class.active]="buttons[3].isActive"
+         (click)="handlePlayerInput(3)">
+    </div>
+  </div>
+  <div class="restart-controls">
+    <button class="restart-button" (click)="startGame()">
+      <lucide-icon [img]="RotateCcwIcon"></lucide-icon>
+    </button>
+  </div>
+</div>

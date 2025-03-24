@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
+import { LucideAngularModule, Volume2, VolumeX, Music, RotateCcw } from 'lucide-angular';
+import { AudioService } from '../../services/audio.service';
 
 interface Card {
   id: number;
@@ -14,9 +16,13 @@ interface Card {
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss'],
   standalone: true,
-  imports: [CommonModule, CardComponent]
+  imports: [CommonModule, CardComponent, LucideAngularModule]
 })
 export class GameBoardComponent implements OnInit, OnDestroy {
+  readonly Volume2Icon = Volume2;
+  readonly VolumeXIcon = VolumeX;
+  readonly Music = Music;
+  readonly RotateCcwIcon = RotateCcw;
   cards: Card[] = [];
   flippedCards: Card[] = [];
   values = ['🍎', '🍌', '🍇', '🍉', '🍒', '🍍'];
@@ -26,6 +32,12 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   isGameComplete: boolean = false;
   isTimerStarted: boolean = false;
   isMuted: boolean = false;
+
+  constructor(private audioService: AudioService) {
+    this.audioService.isMuted$.subscribe(
+      muted => this.isMuted = muted
+    );
+  }
 
   formatTime(): string {
     const hours = Math.floor(this.timer / 3600);
@@ -74,6 +86,7 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     
     card.flipped = true;
     this.flippedCards.push(card);
+    this.audioService.playFlipSound();
     
     if (this.flippedCards.length === 2) {
       setTimeout(() => this.checkMatch(), 1000);
@@ -100,6 +113,7 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   checkMatch() {
     if (this.flippedCards[0].value === this.flippedCards[1].value) {
       this.flippedCards.forEach(card => card.matched = true);
+      this.audioService.playBlastSound();
       if (this.cards.every(card => card.matched)) {
         this.isGameComplete = true;
         this.stopTimer();
@@ -111,6 +125,6 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   }
 
   toggleSound() {
-    this.isMuted = !this.isMuted;
+    this.audioService.toggleMute();
   }
 }

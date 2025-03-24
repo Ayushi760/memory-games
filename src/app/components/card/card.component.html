@@ -1,3 +1,9 @@
-<div class="card" [class.flipped]="card.flipped || card.matched">
-    <span *ngIf="card.flipped || card.matched" class="card-value">{{ card.value }}</span>
+<div class="card-container">
+  <div class="card" [class.flipped]="card.flipped || card.matched">
+    <div class="card-face card-front">
+    </div>
+    <div class="card-face card-back">
+      <span class="card-value">{{ card.value }}</span>
+    </div>
   </div>
+</div>

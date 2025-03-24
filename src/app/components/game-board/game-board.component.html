@@ -1,4 +1,6 @@
-<div class="game-board">
+<div class="container">
+  <span class="header">MATCHING CARDS</span>
+  <div class="game-board">
   <div class="timer-container">
     <div class="timer">{{ formatTime() }}<span class="milliseconds">.{{ formatMilliseconds() }}</span></div>
   </div>
@@ -8,27 +10,21 @@
   <div class="board">
     <app-card *ngFor="let card of cards" [card]="card" (click)="flipCard(card)"></app-card>
   </div>
-  <button (click)="startGame()">Restart</button>
-  <div class="sound-controls">
-    <button class="sound-button" (click)="toggleSound()">
-      <svg *ngIf="!isMuted" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="lucide lucide-volume-2">
-        <path
-          d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
-        <path d="M16 9a5 5 0 0 1 0 6" />
-        <path d="M19.364 18.364a9 9 0 0 0 0-12.728" />
-      </svg>
-      <svg *ngIf="isMuted" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="lucide lucide-volume-off">
-        <path d="M16 9a5 5 0 0 1 .95 2.293" />
-        <path d="M19.364 5.636a9 9 0 0 1 1.889 9.96" />
-        <path d="m2 2 20 20" />
-        <path
-          d="m7 7-.587.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298V11" />
-        <path d="M9.828 4.172A.686.686 0 0 1 11 4.657v.686" />
-      </svg>
+  <div class="restart-controls">
+    <button class="restart-button" (click)="startGame()">
+      <lucide-icon [img]="RotateCcwIcon"></lucide-icon>
     </button>
   </div>
+  <div class="sound-controls">
+    <button class="sound-button" (click)="toggleSound()">
+      <lucide-icon *ngIf="!isMuted" [img]="Volume2Icon"></lucide-icon>
+      <lucide-icon *ngIf="isMuted" [img]="VolumeXIcon"></lucide-icon>
+    </button>
+  </div>
+  <div class="music-controls">
+    <button class="music-button">
+      <lucide-icon [img]="Music"></lucide-icon>
+    </button>
+  </div>
+</div>
 </div>

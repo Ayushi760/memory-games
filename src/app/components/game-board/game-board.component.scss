@@ -1,3 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: black;
+}
+
+.header {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  color: white;
+  font-size: 24px;
+}
+
 .game-board {
   display: flex;
   justify-content: center;
@@ -53,14 +71,14 @@
 
 .sound-button {
   background: none;
-  border: 2px solid white;
+  border: 1px solid white;
   cursor: pointer;
-  padding: 12px;
-  border-radius: 4px;
+  padding: 8px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FCEC2B;
+  color: #fff;
   transition: all 0.2s ease;
 
   &:hover {
@@ -73,7 +91,97 @@
   }
 
   svg {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
+  }
+
+  lucide-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.restart-controls {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  z-index: 1000;
+}
+
+.restart-button {
+  background: none;
+  border: 1px solid white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  lucide-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.sound-controls {
+  position: fixed;
+  bottom: 40px;
+  left: 90px;
+  z-index: 1000;
+}
+
+.music-controls {
+  position: fixed;
+  bottom: 40px;
+  left: 140px;
+  z-index: 1000;
+}
+
+.music-button{
+  background: none;
+  border: 1px solid white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  lucide-icon {
+    width: 24px;
+    height: 24px;
   }
 }
