@@ -1,9 +1,29 @@
 <div class="home-container">
     <h1>Memory Games</h1>
     <div class="game-options">
-        <a routerLink="/memory" class="game-button">Memory Card Game</a>
-        <a routerLink="/simon" class="game-button">Simon Says Game</a>
-        <a routerLink="/word-memory" class="game-button">Word Memory Game</a>
-        <a routerLink="/typing-test" class="game-button">Typing Test Game</a>
+        <div class="games">
+            <div class="game-card" (click)="navigateTo('/memory')">
+                <img src="/memory-card.png" alt="Memory Card Game">
+            </div>
+            <p class="card-text">Memory Card</p>
+        </div>
+        <div class="games">
+            <div class="game-card" (click)="navigateTo('/simon')">
+                <img src="/simon-says.png" alt="Simon Says Game">
+            </div>
+            <p class="card-text">Simon Says</p>
+        </div>
+        <div class="games">
+            <div class="game-card" (click)="navigateTo('/word-memory')">
+                <img src="/word-memory.png" alt="Word Memory Game">
+            </div>
+            <p class="card-text">Word Memory</p>
+        </div>
+        <div class="games">
+            <div class="game-card" (click)="navigateTo('/typing-test')">
+                <img src="/typing-test.png" alt="Typing Test Game">
+            </div>
+            <p class="card-text">Typing Test</p>
+        </div>
     </div>
 </div>
