@@ -3,11 +3,31 @@ import { HomeComponent } from './components/home/home.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 import { SimonSaysComponent } from './components/simon-says/simon-says.component';
 import { WordMemoryComponent } from './components/word-memory/word-memory.component';
+import { TypingTestComponent } from './components/typing-test/typing-test.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'memory', component: GameBoardComponent },
-  { path: 'simon', component: SimonSaysComponent },
-  { path: 'word-memory', component: WordMemoryComponent },
-  { path: '**', redirectTo: '' }
+  { 
+    path: '', 
+    component: HomeComponent 
+  },
+  { 
+    path: 'memory', 
+    component: GameBoardComponent 
+  },
+  { 
+    path: 'simon', 
+    component: SimonSaysComponent 
+  },
+  { 
+    path: 'word-memory', 
+    component: WordMemoryComponent 
+  },
+  { 
+    path: 'typing-test', 
+    component: TypingTestComponent
+  },
+  { 
+    path: '**', 
+    redirectTo: '' 
+  }
 ];

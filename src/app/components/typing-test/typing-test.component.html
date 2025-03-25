@@ -1,0 +1,72 @@
+<div class="container">
+  <span class="header">TYPING TEST</span>
+  <div class="timer-container">
+    <div class="timer" [class.warning]="timer <= 30">
+      {{formatTime(timer)}}<span class="milliseconds">.00</span>
+    </div>
+  </div>
+
+  <div class="scoreboard">
+    <h3>Level Scores</h3>
+    <div class="score-item" *ngFor="let lvl of [1, 2, 3]" [class.active]="level === lvl">
+      <span class="level">Level {{lvl}}</span>
+      <span class="required">Required: {{lvl === 1 ? '70%' : lvl === 2 ? '80%' : '100%'}}</span>
+      <span class="score" *ngIf="getLevelScore(lvl) !== null">Score: {{getLevelScore(lvl)?.score || 0}}%</span>
+      <span class="score" *ngIf="getLevelScore(lvl) !== null">WPM: {{getLevelScore(lvl)?.wpm}}</span>
+      <span class="score" *ngIf="getLevelScore(lvl) !== null">Time Left: {{getLevelScore(lvl)?.timeLeft}}</span>
+      <span class="score" *ngIf="getLevelScore(lvl) !== null">Accuracy: {{getLevelScore(lvl)?.accuracy}}%</span>
+      <span class="status" *ngIf="getLevelScore(lvl) !== null">
+        {{(getLevelScore(lvl)?.score || 0) >= (lvl === 1 ? 70 : lvl === 2 ? 80 : 100) ? '✓' : '✗'}}
+      </span>
+    </div>
+  </div>
+
+  <div class="game-header">
+    <div class="stats">
+      <div class="stat-item">
+        <span class="label">Level</span>
+        <span class="value">{{level}}/{{maxLevel}}</span>
+      </div>
+      <div class="stat-item">
+        <span class="label">Accuracy</span>
+        <span class="value">{{accuracy}}%</span>
+      </div>
+      <div class="stat-item">
+        <span class="label">WPM</span>
+        <span class="value">{{wordsPerMinute}}</span>
+      </div>
+      <div class="stat-item">
+        <span class="label">Progress</span>
+        <span class="value">{{calculateCompletion()}}%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-content">
+    <div class="text-display" [class.game-active]="isGameActive">
+      <p>{{currentText}}</p>
+    </div>
+    
+    <div class="input-area" *ngIf="!gameCompleted">
+      <textarea
+        [placeholder]="isGameActive ? 'Keep typing...' : 'Start typing to begin'"
+        [(ngModel)]="userInput"
+        (ngModelChange)="onInputChange($event)"
+        (paste)="onPaste($event)"
+        (contextmenu)="onContextMenu($event)"
+        [class.error]="accuracy < 100"
+      ></textarea>
+    </div>
+
+    <div class="game-over" *ngIf="gameCompleted">
+      <h2>Game Completed!</h2>
+      <button class="play-again-btn" (click)="playAgain()">Play Again</button>
+    </div>
+  </div>
+
+  <div class="restart-controls">
+    <button class="restart-button" (click)="playAgain()">
+      <lucide-icon [img]="RotateCcwIcon"></lucide-icon>
+    </button>
+  </div>
+</div>
