@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
         <a routerLink="/memory" class="game-button">Memory Card Game</a>
         <a routerLink="/simon" class="game-button">Simon Says Game</a>
         <a routerLink="/word-memory" class="game-button">Word Memory Game</a>
+        <a routerLink="/typing-test" class="game-button">Typing Test Game</a>
       </div>
     </div>
   `,
