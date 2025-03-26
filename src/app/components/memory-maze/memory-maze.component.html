@@ -1,0 +1,53 @@
+<div class="maze-container">
+    <div *ngIf="showPopup" class="popup">
+        <span>How to play</span>
+        <div class="popup-content">
+            <div>1. Click "Start" → Memorize the yellow path before it disappears.</div>
+            <div>2. Recreate the path by clicking the correct cells before time runs out! </div>
+            <div>3. Made a mistake? Double-click to deselect a cell.</div>
+            <div>4. Win by selecting the correct path → Move to the next level!</div>
+            <div>5. Lose if time runs out or the path is wrong → Restart from Level 1.</div>
+        </div>
+        <div>Click Start & Test Your Memory!</div>
+        <button (click)="closePopup()">I Understand!</button>
+    </div>
+    <div *ngIf="!showPopup">
+        <span class="header">MEMORY MAZE</span>
+        <h2>Level {{ level }}</h2>
+
+        <div class="timer-container">
+            <div class="timer">{{ formatTime() }}</div>
+        </div>
+
+        <!-- Instructions -->
+        <div *ngIf="showPath" class="instructions">Memorize the path!</div>
+        <div *ngIf="!showPath && gameStarted && !gameEnded" class="instructions">Recreate the path!</div>
+        <div *ngIf="gameEnded" class="instructions">
+            <span *ngIf="win" class="win">🎉 You Won! 🎉</span>
+            <span *ngIf="!win" class="lose">❌ You Lost! ❌</span>
+        </div>
+
+        <!-- Maze Grid -->
+        <div class="maze-grid">
+            <div *ngFor="let row of grid; let rowIndex = index" class="maze-row">
+                <div *ngFor="let cell of row; let colIndex = index" class="maze-cell" [ngClass]="{
+                    'path-cell': showPath && grid[rowIndex][colIndex],
+                    'selected': !showPath && gameStarted && isSelected(rowIndex, colIndex),
+                    'correct': gameEnded && win && isCorrect(rowIndex, colIndex),
+                    'incorrect': gameEnded && !win && isIncorrect(rowIndex, colIndex)
+                }" (click)="selectCell(rowIndex, colIndex)" (dblclick)="selectCell(rowIndex, colIndex)">
+                    <!-- Deselect on double-click -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Show "Start" button before game begins -->
+        <button *ngIf="!gameStarted && !showPath" class="start-btn" (click)="startPathPhase()">Start Game</button>
+
+        <div class="restart-controls">
+            <button class="restart-button" (click)="playAgain()">
+                <lucide-icon [img]="RotateCcwIcon"></lucide-icon>
+            </button>
+        </div>
+    </div>
+</div>
