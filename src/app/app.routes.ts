@@ -5,6 +5,7 @@ import { SimonSaysComponent } from './components/simon-says/simon-says.component
 import { WordMemoryComponent } from './components/word-memory/word-memory.component';
 import { TypingTestComponent } from './components/typing-test/typing-test.component';
 import { MemoryMazeComponent } from './components/memory-maze/memory-maze.component';
+import { SudokuComponent } from './components/sudoku/sudoku.component';
 
 export const routes: Routes = [
   { 
@@ -30,6 +31,10 @@ export const routes: Routes = [
   { 
     path: 'memory-maze', 
     component: MemoryMazeComponent
+  },
+  { 
+    path: 'sudoku', 
+    component: SudokuComponent
   },
   { 
     path: '**', 

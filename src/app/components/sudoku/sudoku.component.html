@@ -1,0 +1,25 @@
+<div class="sudoku-container">
+  <span class="header">SUDOKU</span>
+  <div class="timer-container">
+    <div class="timer">{{ formatTime() }}<span class="milliseconds"></span></div>
+  </div>
+  <div class="sudoku-grid">
+    <div *ngFor="let row of board; let rowIndex = index" class="sudoku-row">
+      <input 
+        *ngFor="let cell of row; let colIndex = index" 
+        class="sudoku-cell" 
+        [value]="userBoard[rowIndex][colIndex] !== null ? userBoard[rowIndex][colIndex] : ''" 
+        [readonly]="!isEditable(rowIndex, colIndex)" 
+        (input)="updateBoard($event, rowIndex, colIndex)"
+        [class.blink]="gameWon && isEditable(rowIndex, colIndex)"
+      />
+    </div>
+  </div>
+  
+  <button (click)="showSolution()" class="start-btn">Show Solution</button>
+  <button (click)="checkCompletion()" class="completion-btn">Check Completion</button>
+  <div *ngIf="gameEnded" class="instructions">
+    <span *ngIf="gameWon" class="winner">🎉 You Won! 🎉</span>
+    <span *ngIf="!gameWon" class="lose">❌ You Lost! ❌</span>
+  </div>
+</div>
